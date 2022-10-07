@@ -1,0 +1,44 @@
+<%- include("templates/header")%>
+  <body>
+    <div class="container-md">
+      <div class="row justify-content-center align-items-center g-2 p-3">
+        <h3 class="display-5">Employee</h3>
+        <a href="/create" class="btn btn-primary btn-sm">Create</a>
+        <div class="col-md-lg">
+          <div class="table-responsive">
+            <table class="table table-secondary">
+              <thead>
+                <tr>
+                  <th scope="col">Names</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">Options</th>
+                </tr>
+              </thead>
+              <tbody>
+               <% if (data.length != 0){ %>
+                <% data.forEach((item)=>{ %>
+                  <tr class="">
+                    <td scope="row"><%= item.names %></td>
+                    <td><%= item.address %></td>
+                    <td><%= item.phone %></td>
+                    <td>
+                      <a href="/edit/<%= item.id %> " class="btn btn-info text-white btn-sm">Edit</a>
+                      <a href="/delete/<%= item.id %> " class="btn btn-danger btn-sm" >Delete</a>
+                    </td>
+                  </tr>
+                  <% })%>
+                <% } else { %>
+                  <tr class="">
+                    <td scope="row" colspan="4"  class="text-center">No data</td>
+                  </tr>
+                  <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include("templates/footer")%>
+  </body>
+</html>

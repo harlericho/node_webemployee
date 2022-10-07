@@ -1,0 +1,29 @@
+<%- include("templates/header")%>
+  <body>
+    <div class="container-md">
+      <div class="row justify-content-center align-items-center g-2 p-3">
+        <h3 class="display-5">Employee</h3>
+        <spam class="display-6"><%= message %></spam>
+        <div class="col-md-lg">
+          <form action="/save" method="post">
+            <div class="mb-3">
+              <label for="names" class="form-label">Names:</label>
+              <input type="text" class="form-control" id="names" name="names" autofocus required>
+            </div>
+            <div class="mb-3">
+              <label for="address" class="form-label">Address:</label>
+              <textarea class="form-control" placeholder="Leave a address here" id="address" name="address" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone:</label>
+              <input type="text" class="form-control" id="phone" name="phone" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="/" class="btn btn-secondary">Go to</a>
+          </form>
+        </div>
+      </div>
+    </div>
+    <%- include("templates/footer")%>
+  </body>
+</html>
