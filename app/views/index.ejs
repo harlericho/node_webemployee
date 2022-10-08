@@ -1,44 +1,104 @@
 <%- include("templates/header")%>
   <body>
     <div class="container-md">
-      <div class="row justify-content-center align-items-center g-2 p-3">
-        <h3 class="display-5">Employee</h3>
-        <a href="/create" class="btn btn-primary btn-sm">Create</a>
-        <div class="col-md-lg">
-          <div class="table-responsive">
-            <table class="table table-secondary">
-              <thead>
-                <tr>
-                  <th scope="col">Names</th>
-                  <th scope="col">Address</th>
-                  <th scope="col">Phone</th>
-                  <th scope="col">Options</th>
-                </tr>
-              </thead>
-              <tbody>
-               <% if (data.length != 0){ %>
-                <% data.forEach((item)=>{ %>
-                  <tr class="">
-                    <td scope="row"><%= item.names %></td>
-                    <td><%= item.address %></td>
-                    <td><%= item.phone %></td>
-                    <td>
-                      <a href="/edit/<%= item.id %> " class="btn btn-info text-white btn-sm">Edit</a>
-                      <a href="/delete/<%= item.id %> " class="btn btn-danger btn-sm" >Delete</a>
-                    </td>
-                  </tr>
-                  <% })%>
-                <% } else { %>
-                  <tr class="">
-                    <td scope="row" colspan="4"  class="text-center">No data</td>
-                  </tr>
-                  <% } %>
-              </tbody>
-            </table>
+      <div class="row justify-content-center align-items-center g-2 p-5">
+        <h3 class="display-5">
+          <img src="employee.png" alt="ico employee" width="50px">
+          Employee</h3>
+        <div class="card">
+          <div class="card-header">
+            Employee
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-8">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-secondary">
+                        <thead>
+                          <tr>
+                            <th scope="col">Names</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Options</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                         <% if (data.length != 0){ %>
+                          <% data.forEach((item)=>{ %>
+                            <tr class="">
+                              <td scope="row"><%= item.names %></td>
+                              <td><%= item.address %></td>
+                              <td><%= item.phone %></td>
+                              <td>
+                                <a href="/<%= item.id %> " class="btn btn-info text-white btn-sm">Edit</a>
+                                <a href="/delete/<%= item.id %> " class="btn btn-danger btn-sm" >Delete</a>
+                              </td>
+                            </tr>
+                            <% })%>
+                          <% } else { %>
+                            <tr class="">
+                              <td scope="row" colspan="4"  class="text-center">No data</td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card">
+                  <div class="card-body">
+                   <% if(dataId == null) {%>
+                    <form action="/save" method="post">
+                      <div class="mb-3">
+                        <label for="names" class="form-label">Names:</label>
+                        <input type="text" class="form-control" id="names" name="names" autofocus required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="address" class="form-label">Address:</label>
+                        <textarea class="form-control" placeholder="Leave a address here" id="address" name="address" required></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="phone" class="form-label">Phone:</label>
+                        <input type="text" class="form-control" id="phone" name="phone" required>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="reset" class="btn btn-secondary">Go to</button>
+                      <!-- <a href="/" class="btn btn-secondary">Go to</a> -->
+                    </form>
+                    <% } else { %>
+                      <form action="/update" method="post">
+                        <div class="mb-3">
+                          <input type="hidden" class="form-control" id="id" name="id" value="<%= dataId.id %> ">
+                        </div>
+                        <div class="mb-3">
+                          <label for="names" class="form-label">Names:</label>
+                          <input type="text" class="form-control" id="names" name="names" autofocus required value="<%= dataId.names %> ">
+                        </div>
+                        <div class="mb-3">
+                          <label for="address" class="form-label">Address:</label>
+                          <textarea class="form-control" placeholder="Leave a address here" id="address" name="address" required><%= dataId.address %> </textarea>
+                        </div>
+                        <div class="mb-3">
+                          <label for="phone" class="form-label">Phone:</label>
+                          <input type="text" class="form-control" id="phone" name="phone" value="<%= dataId.phone %> " required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <a href="/" class="btn btn-secondary">Go to</a>
+                      </form>
+                    <% } %>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
     <%- include("templates/footer")%>
   </body>
 </html>
